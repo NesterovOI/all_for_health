@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 abstract class AppDimensions {
   //  ВІДСТУПИ (Paddings & Margins)
   static const double spaceXXXS = 2.0;
