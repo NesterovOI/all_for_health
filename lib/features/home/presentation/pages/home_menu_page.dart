@@ -1,5 +1,7 @@
 import 'package:all_for_health/core/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:all_for_health/core/navigation/app_router.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeMenuPage extends StatelessWidget {
   const HomeMenuPage({super.key});
@@ -13,7 +15,7 @@ class HomeMenuPage extends StatelessWidget {
           children: [
             Text('HomeMenuPage'),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () => context.go('/homeMenu/homeDetails'),
               child: Text('HomeDescriptionPage'),
             ),
           ],

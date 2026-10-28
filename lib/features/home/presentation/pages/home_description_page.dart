@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:all_for_health/core/theme/theme.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeDescriptionPage extends StatelessWidget {
   const HomeDescriptionPage({super.key});
@@ -13,7 +14,7 @@ class HomeDescriptionPage extends StatelessWidget {
           children: [
             Text('HomeDescriptionPage'),
             const SizedBox(height: AppDimensions.spaceXS),
-            ElevatedButton(onPressed: () {}, child: Text('Go')),
+            ElevatedButton(onPressed: () => context.pop(), child: Text('Go')),
           ],
         ),
       ),

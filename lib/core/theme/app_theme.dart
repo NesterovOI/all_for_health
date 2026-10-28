@@ -93,11 +93,13 @@ abstract class AppTheme {
               fontWeight: FontWeight.bold,
               fontSize: AppDimensions.fontBody,
               color: AppColors.lightTextPrimary,
+              overflow: TextOverflow.ellipsis,
             );
           } else {
             return const TextStyle(
               fontSize: AppDimensions.fontCaption,
               color: AppColors.lightTextSecondary,
+              overflow: TextOverflow.ellipsis,
             );
           }
         }),

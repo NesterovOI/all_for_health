@@ -30,15 +30,15 @@ final GoRouter router = GoRouter(
           routes: [
             GoRoute(
               path: AppRouter.home,
-              builder: (context, state) => HomePage(),
+              builder: (context, state) => const HomePage(),
               routes: [
                 GoRoute(
                   path: AppRouter.homeMenu,
-                  builder: (context, state) => HomeMenuPage(),
+                  builder: (context, state) => const HomeMenuPage(),
                   routes: [
                     GoRoute(
                       path: AppRouter.homeDetails,
-                      builder: (context, state) => HomeDescriptionPage(),
+                      builder: (context, state) => const HomeDescriptionPage(),
                     ),
                   ],
                 ),
@@ -50,7 +50,7 @@ final GoRouter router = GoRouter(
           routes: [
             GoRoute(
               path: AppRouter.catalog,
-              builder: (context, state) => CatalogPage(),
+              builder: (context, state) => const CatalogPage(),
             ),
           ],
         ),
@@ -58,7 +58,7 @@ final GoRouter router = GoRouter(
           routes: [
             GoRoute(
               path: AppRouter.settings,
-              builder: (context, state) => SettingPage(),
+              builder: (context, state) => const SettingPage(),
             ),
           ],
         ),
