@@ -23,17 +23,19 @@ abstract class AppTheme {
         ),
         bodyLarge: TextStyle(
           fontSize: AppDimensions.fontSubheading,
+          fontWeight: FontWeight.bold,
           color: AppColors.lightTextPrimary,
           height: AppDimensions.spaceXXXS,
         ),
         bodyMedium: TextStyle(
           fontSize: AppDimensions.fontBody,
-          color: AppColors.lightTextSecondary,
+          color: AppColors.lightTextPrimary,
+          fontWeight: FontWeight.bold,
           height: AppDimensions.spaceXXXS,
         ),
         bodySmall: TextStyle(
           fontSize: AppDimensions.fontCaption,
-          color: AppColors.lightTextPrimary,
+          color: AppColors.lightTextSecondary,
           height: AppDimensions.spaceXXXS,
         ),
       ),
@@ -57,7 +59,7 @@ abstract class AppTheme {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
           borderSide: BorderSide(
-            color: AppColors.primary,
+            color: AppColors.lightSurface,
             width: AppDimensions.spaceXXXS,
           ),
         ),
@@ -71,7 +73,7 @@ abstract class AppTheme {
       ),
       //Колір курсора віджета TextFromField
       textSelectionTheme: const TextSelectionThemeData(
-        cursorColor: AppColors.primary,
+        cursorColor: AppColors.lightSurface,
       ),
       //Налаштування віджета TextButton
       textButtonTheme: TextButtonThemeData(
@@ -103,6 +105,19 @@ abstract class AppTheme {
             );
           }
         }),
+      ),
+      //Налаштування віджета Card
+      cardTheme: CardThemeData(
+        color: AppColors.lightSurfaceSecondary,
+        elevation: AppDimensions.spaceXXS,
+        shadowColor: AppColors.lightTextSecondary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+          side: const BorderSide(
+            color: AppColors.lightTextSecondary,
+            width: AppDimensions.spaceXXXS,
+          ),
+        ),
       ),
     );
   }
@@ -198,14 +213,29 @@ abstract class AppTheme {
               fontWeight: FontWeight.bold,
               fontSize: AppDimensions.fontBody,
               color: AppColors.darkTextPrimary,
+              overflow: TextOverflow.ellipsis,
             );
           } else {
             return const TextStyle(
               fontSize: AppDimensions.fontCaption,
               color: AppColors.darkTextSecondary,
+              overflow: TextOverflow.ellipsis,
             );
           }
         }),
+      ),
+      //Налаштування віджета Card
+      cardTheme: CardThemeData(
+        color: AppColors.darkSurfaceSecondary,
+        elevation: AppDimensions.spaceXXS,
+        shadowColor: AppColors.darkTextPrimary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+          side: const BorderSide(
+            color: AppColors.darkTextPrimary,
+            width: AppDimensions.spaceXXXS,
+          ),
+        ),
       ),
     );
   }

@@ -11,7 +11,7 @@ abstract class AppDimensions {
   static const double spaceXXXL = 24.0;
   static const double spaceXXL = 32.0;
   static const double spaceXL = 48.0;
-  static const double spaceL = 60.0;
+  static const double spaceL = 80.0;
 
   //  ЗАОКРУГЛЕННЯ (Border Radius)
   static const double radiusXXXS = 2.0;

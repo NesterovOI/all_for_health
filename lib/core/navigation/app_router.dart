@@ -7,8 +7,8 @@ import 'package:all_for_health/features/setting/presentation/pages/setting_page.
 
 class AppRouter {
   static const String home = '/';
-  static const String homeMenu = 'homeMenu';
-  static const String homeDetails = 'homeDetails';
+  static const String homeMenu = '/homeMenu';
+  static const String homeDetails = '$homeMenu/homeDetails';
   static const String catalog = '/catalog';
   static const String settings = '/settings';
 }
@@ -33,11 +33,11 @@ final GoRouter router = GoRouter(
               builder: (context, state) => const HomePage(),
               routes: [
                 GoRoute(
-                  path: AppRouter.homeMenu,
+                  path: 'homeMenu',
                   builder: (context, state) => const HomeMenuPage(),
                   routes: [
                     GoRoute(
-                      path: AppRouter.homeDetails,
+                      path: 'homeDetails',
                       builder: (context, state) => const HomeDescriptionPage(),
                     ),
                   ],
