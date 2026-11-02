@@ -3,13 +3,16 @@ import 'package:go_router/go_router.dart';
 import 'package:all_for_health/features/home/presentation/pages/export_page.dart';
 import 'package:all_for_health/features/main_navigation/presentation/pages/main_page.dart';
 import 'package:all_for_health/features/catalog/presentation/pages/catalog_page.dart';
+import 'package:all_for_health/features/catalog/presentation/pages/save_catalog_page.dart';
 import 'package:all_for_health/features/setting/presentation/pages/setting_page.dart';
+import 'package:all_for_health/features/home/domain/entities/health_entity.dart';
 
 class AppRouter {
   static const String home = '/';
   static const String homeMenu = '/homeMenu';
   static const String homeDetails = '$homeMenu/homeDetails';
   static const String catalog = '/catalog';
+  static const String saveCatalog = '/saveCatalog';
   static const String settings = '/settings';
 }
 
@@ -38,7 +41,10 @@ final GoRouter router = GoRouter(
                   routes: [
                     GoRoute(
                       path: 'homeDetails',
-                      builder: (context, state) => const HomeDescriptionPage(),
+                      builder: (context, state) {
+                        final data = state.extra as HealthEntity;
+                        return HomeDescriptionPage(healthEntity: data);
+                      },
                     ),
                   ],
                 ),
@@ -51,6 +57,12 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: AppRouter.catalog,
               builder: (context, state) => const CatalogPage(),
+              routes: [
+                GoRoute(
+                  path: 'saveCatalog',
+                  builder: (context, state) => const SaveCatalogPage(),
+                ),
+              ],
             ),
           ],
         ),

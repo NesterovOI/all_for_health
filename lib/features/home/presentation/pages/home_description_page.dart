@@ -3,23 +3,22 @@ import 'package:all_for_health/core/theme/theme.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:all_for_health/features/home/domain/entities/health_entity.dart';
 
 class HomeDescriptionPage extends StatelessWidget {
-  final String name;
-  final String filePath;
+  final HealthEntity healthEntity;
 
-  const HomeDescriptionPage({
-    super.key,
-    required this.name,
-    required this.filePath,
-  });
+  const HomeDescriptionPage({super.key, required this.healthEntity});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(name, style: Theme.of(context).textTheme.titleMedium),
+        title: Text(
+          healthEntity.name,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
         centerTitle: true,
       ),
       body: Column(
@@ -35,7 +34,7 @@ class HomeDescriptionPage extends StatelessWidget {
           ),
           const SizedBox(height: AppDimensions.spaceXS),
           FutureBuilder<String>(
-            future: rootBundle.loadString(filePath),
+            future: rootBundle.loadString(healthEntity.health),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
