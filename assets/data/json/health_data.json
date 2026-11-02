@@ -1,0 +1,45 @@
+[
+  {
+    "id": "item_001",
+    "title": "Cardio Health",
+    "youTube": "https://youtube.com",
+    "image": "assets/images/menu/cardio.jpg",
+    "translations": {
+      "uk": {
+        "name": "Здоров'я серця",
+        "description": "Базові поради для підтримки кардіосистеми.",
+        "health": "assets/md/uk/cardio.md"
+      },
+      "en": {
+        "name": "Heart Health",
+        "description": "Basic tips for supporting the cardiovascular system.",
+        "health": "assets/md/en/cardio.md"
+      },
+      "pl": {
+        "name": "Zdrowie serca",
+        "description": "Podstawowe wskazówki wspierające układ krążenia.",
+        "health": "assets/md/pl/cardio.md"
+      },
+      "de": {
+        "name": "Herzgesundheit",
+        "description": "Grundlegende Tipps zur Unterstützung des Herz-Kreislauf-Systems.",
+        "health": "assets/md/de/cardio.md"
+      },
+      "fr": {
+        "name": "Santé cardiaque",
+        "description": "Conseils de base pour soutenir le système cardiovasculaire.",
+        "health": "assets/md/fr/cardio.md"
+      },
+      "it": {
+        "name": "Salute del cuore",
+        "description": "Consigli di base per supportare il sistema cardiovascolare.",
+        "health": "assets/md/it/cardio.md"
+      },
+      "es": {
+        "name": "Salud del corazón",
+        "description": "Consejos básicos para apoyar el sistema cardiovascular.",
+        "health": "assets/md/es/cardio.md"
+      }
+    }
+  }
+]
