@@ -10,4 +10,6 @@ abstract class AppStrings {
   static const String categoryName1 = 'Усі';
   static const String categoryName2 = 'Рецепти';
   static const String categoryName3 = 'Харчування';
+  static const String errorLoadingHealthList =
+      'Помилка завантаження списку здоровʼя: ';
 }
