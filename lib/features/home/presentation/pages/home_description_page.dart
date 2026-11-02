@@ -3,20 +3,53 @@ import 'package:all_for_health/core/theme/theme.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:all_for_health/features/home/domain/entities/health_entity.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class HomeDescriptionPage extends StatelessWidget {
+class HomeDescriptionPage extends ConsumerStatefulWidget {
   final HealthEntity healthEntity;
 
   const HomeDescriptionPage({super.key, required this.healthEntity});
 
   @override
+  ConsumerState<HomeDescriptionPage> createState() =>
+      _HomeDescriptionPageState();
+}
+
+class _HomeDescriptionPageState extends ConsumerState<HomeDescriptionPage> {
+  YoutubePlayerController? _youtubeController;
+
+  @override
+  void initState() {
+    super.initState();
+    final path = widget.healthEntity.youTube;
+
+    if (path != null && path.isNotEmpty) {
+      final videoId = YoutubePlayer.convertUrlToId(path);
+      if (videoId != null) {
+        _youtubeController = YoutubePlayerController(
+          initialVideoId: videoId,
+          flags: const YoutubePlayerFlags(autoPlay: false, mute: false),
+        );
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _youtubeController?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final controller = _youtubeController;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          healthEntity.name,
+          widget.healthEntity.name,
           style: Theme.of(context).textTheme.titleMedium,
         ),
         centerTitle: true,
@@ -34,7 +67,7 @@ class HomeDescriptionPage extends StatelessWidget {
           ),
           const SizedBox(height: AppDimensions.spaceXS),
           FutureBuilder<String>(
-            future: rootBundle.loadString(healthEntity.health),
+            future: rootBundle.loadString(widget.healthEntity.health),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
@@ -74,6 +107,15 @@ class HomeDescriptionPage extends StatelessWidget {
               );
             },
           ),
+
+          if (controller != null) ...[
+            const SizedBox(height: AppDimensions.spaceXS),
+            YoutubePlayer(
+              controller: controller,
+              showVideoProgressIndicator: true,
+              progressIndicatorColor: AppColors.primary,
+            ),
+          ],
         ],
       ),
     );

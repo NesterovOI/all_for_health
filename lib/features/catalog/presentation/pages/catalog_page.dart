@@ -71,6 +71,7 @@ class CatalogPage extends ConsumerWidget {
                 },
               ),
             ),
+            const SizedBox(height: AppDimensions.spaceXS),
           ],
         ),
       ),
