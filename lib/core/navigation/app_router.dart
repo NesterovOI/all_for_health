@@ -10,6 +10,12 @@ import 'package:all_for_health/features/home/domain/entities/health_entity.dart'
 class AppRouter {
   static const String home = '/';
   static const String homeMenu = '/homeMenu';
+  static const String hospital = 'hospital';
+  static const String herbs = 'herbs';
+  static const String products = 'products';
+  static const String cooking = 'cooking';
+  static const String microelements = 'microelements';
+  static const String sport = 'sport';
   static const String homeDetails = '$homeMenu/homeDetails';
   static const String catalog = '/catalog';
   static const String saveCatalog = '/saveCatalog';
@@ -37,7 +43,11 @@ final GoRouter router = GoRouter(
               routes: [
                 GoRoute(
                   path: 'homeMenu',
-                  builder: (context, state) => const HomeMenuPage(),
+                  builder: (context, state) {
+                    final categoryTitle =
+                        state.extra as String? ?? AppRouter.herbs;
+                    return HomeMenuPage(categoryTitle: categoryTitle);
+                  },
                   routes: [
                     GoRoute(
                       path: 'homeDetails',

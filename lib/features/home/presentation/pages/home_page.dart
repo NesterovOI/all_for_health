@@ -22,6 +22,14 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, String>> categories = [
+      {'title': 'hospital', 'name': AppStrings.categoryName2},
+      {'title': 'herbs', 'name': AppStrings.categoryName3},
+      {'title': 'products', 'name': AppStrings.categoryName4},
+      {'title': 'cooking', 'name': AppStrings.categoryName5},
+      {'title': 'microelements', 'name': AppStrings.categoryName6},
+      {'title': 'sport', 'name': AppStrings.categoryName7},
+    ];
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -59,35 +67,42 @@ class _HomePageState extends ConsumerState<HomePage> {
                   mainAxisSpacing: AppDimensions.spaceXS,
                   childAspectRatio: 0.8,
                 ),
-                itemCount: 6,
+                itemCount: categories.length,
                 itemBuilder: (context, index) {
-                  return Card(
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(
-                        AppDimensions.radiusM,
-                      ),
-                      onTap: () => context.go(AppRouter.homeMenu),
-                      child: Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(
-                              AppDimensions.radiusM,
+                  final category = categories[index];
+                  final name = category['name'];
+                  if (name != null && name.isNotEmpty) {
+                    return Card(
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(
+                          AppDimensions.radiusM,
+                        ),
+                        onTap: () => context.go(
+                          AppRouter.homeMenu,
+                          extra: category['title'],
+                        ),
+                        child: Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                AppDimensions.radiusM,
+                              ),
+                              child: Image.asset(
+                                'assets/images/menu/menu$index.jpg',
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                            child: Image.asset(
-                              'assets/images/menu/menu1.jpg',
-                              width: double.infinity,
-                              fit: BoxFit.cover,
+                            Text(
+                              name,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                          ),
-                          Text(
-                            'Мікроелементи',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  );
+                    );
+                  }
                 },
               ),
             ),
