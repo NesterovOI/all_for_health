@@ -19,11 +19,14 @@ class HomeDescriptionPage extends ConsumerStatefulWidget {
 
 class _HomeDescriptionPageState extends ConsumerState<HomeDescriptionPage> {
   YoutubePlayerController? _youtubeController;
+  Future<String>? _healthFuture;
 
   @override
   void initState() {
     super.initState();
-    final path = widget.healthEntity.youTube;
+    _healthFuture = rootBundle.loadString(widget.healthEntity.health);
+
+    final path = widget.healthEntity.youTube?.trim();
 
     if (path != null && path.isNotEmpty) {
       final videoId = YoutubePlayer.convertUrlToId(path);
@@ -54,69 +57,77 @@ class _HomeDescriptionPageState extends ConsumerState<HomeDescriptionPage> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(AppDimensions.spaceM),
-            child: Image.asset(
-              'assets/images/menu/menu1.jpg',
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
-          ),
-          const SizedBox(height: AppDimensions.spaceXS),
-          FutureBuilder<String>(
-            future: rootBundle.loadString(widget.healthEntity.health),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text(
-                    AppStrings.errorLoading + snapshot.error.toString(),
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: AppColors.error,
-                    ),
-                  ),
-                );
-              }
-              return Markdown(
-                data: snapshot.data ?? '',
-                styleSheet: MarkdownStyleSheet.fromTheme(theme).copyWith(
-                  p: theme.textTheme.bodyMedium,
-                  h1: theme.textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: theme.colorScheme.primary,
-                  ),
-                  h2: theme.textTheme.titleMedium,
-                  a: TextStyle(
-                    color: theme.colorScheme.primary,
-                    decoration: TextDecoration.underline,
-                  ),
+      body: Padding(
+        padding: const EdgeInsets.all(AppDimensions.spaceXXXM),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(AppDimensions.spaceM),
+                child: Image.asset(
+                  widget.healthEntity.image ?? '',
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
-                onTapLink: (text, href, name) async {
-                  if (href != null) {
-                    final url = Uri.parse(href);
-                    if (await canLaunchUrl(url)) {
-                      await launchUrl(url);
-                    }
+              ),
+              const SizedBox(height: AppDimensions.spaceXS),
+              FutureBuilder<String>(
+                future: _healthFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
                   }
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text(
+                        AppStrings.errorLoading + snapshot.error.toString(),
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: AppColors.error,
+                        ),
+                      ),
+                    );
+                  }
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: MarkdownBody(
+                      data: snapshot.data ?? '',
+                      styleSheet: MarkdownStyleSheet.fromTheme(theme).copyWith(
+                        p: theme.textTheme.bodyMedium,
+                        h1: theme.textTheme.headlineMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: theme.colorScheme.primary,
+                        ),
+                        h2: theme.textTheme.titleMedium,
+                        a: TextStyle(
+                          color: theme.colorScheme.primary,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                      onTapLink: (text, href, name) async {
+                        if (href != null) {
+                          final url = Uri.parse(href);
+                          if (await canLaunchUrl(url)) {
+                            await launchUrl(url);
+                          }
+                        }
+                      },
+                    ),
+                  );
                 },
-              );
-            },
-          ),
+              ),
 
-          if (controller != null) ...[
-            const SizedBox(height: AppDimensions.spaceXS),
-            YoutubePlayer(
-              controller: controller,
-              showVideoProgressIndicator: true,
-              progressIndicatorColor: AppColors.primary,
-            ),
-          ],
-        ],
+              if (controller != null) ...[
+                const SizedBox(height: AppDimensions.spaceXS),
+                YoutubePlayer(
+                  controller: controller,
+                  showVideoProgressIndicator: true,
+                  progressIndicatorColor: AppColors.primary,
+                ),
+              ],
+            ],
+          ),
+        ),
       ),
     );
   }

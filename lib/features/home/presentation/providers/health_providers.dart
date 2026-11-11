@@ -37,6 +37,16 @@ final getHealthListUseCaseProvider = Provider<GetHealthListUseCase>((ref) {
   return GetHealthListUseCase(repository);
 });
 
+final healthListByCategoryProvider =
+    FutureProvider.family<List<HealthEntity>, String>((
+      ref,
+      categoryTitle,
+    ) async {
+      final langCode = ref.watch(languageProvider);
+      final useCase = ref.watch(getHealthByCategoryUseCase);
+      return await useCase.call(categoryTitle, langCode);
+    });
+
 final healthListProvider = FutureProvider<List<HealthEntity>>((ref) async {
   final langCode = ref.watch(
     languageProvider,

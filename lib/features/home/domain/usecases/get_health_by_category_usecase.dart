@@ -5,7 +5,7 @@ class GetHealthByCategoryUseCase {
   final HealthRepository _repository;
 
   GetHealthByCategoryUseCase(this._repository);
-  Future<List<HealthEntity>> call(String categoryTitle, String langCode) async {
-    return await _repository.getHealthListByCategory(categoryTitle, langCode);
+  Future<List<HealthEntity>> call(String categoryId, String langCode) async {
+    return await _repository.getHealthListByCategory(categoryId, langCode);
   }
 }

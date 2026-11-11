@@ -25,7 +25,9 @@ class _HomeMenuPageState extends ConsumerState<HomeMenuPage> {
 
   @override
   Widget build(BuildContext context) {
-    final healthListAsync = ref.watch(healthListProvider);
+    final healthListAsync = ref.watch(
+      healthListByCategoryProvider(widget.categoryTitle),
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text('Title', style: Theme.of(context).textTheme.titleMedium),
@@ -58,7 +60,7 @@ class _HomeMenuPageState extends ConsumerState<HomeMenuPage> {
                   if (healthList.isEmpty) {
                     return Center(
                       child: Text(
-                        AppStrings.errorLoading,
+                        AppStrings.emptyCategory,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: AppColors.error,
                         ),
@@ -75,7 +77,7 @@ class _HomeMenuPageState extends ConsumerState<HomeMenuPage> {
                             AppDimensions.radiusM,
                           ),
                           onTap: () =>
-                              context.go(AppRouter.homeDetails, extra: item),
+                              context.push(AppRouter.homeDetails, extra: item),
                           child: Padding(
                             padding: const EdgeInsets.all(AppDimensions.spaceS),
                             child: Row(

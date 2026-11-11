@@ -23,12 +23,12 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     final List<Map<String, String>> categories = [
-      {'title': 'hospital', 'name': AppStrings.categoryName2},
-      {'title': 'herbs', 'name': AppStrings.categoryName3},
-      {'title': 'products', 'name': AppStrings.categoryName4},
-      {'title': 'cooking', 'name': AppStrings.categoryName5},
-      {'title': 'microelements', 'name': AppStrings.categoryName6},
-      {'title': 'sport', 'name': AppStrings.categoryName7},
+      {'title': 'herbs', 'name': AppStrings.categoryName2},
+      {'title': 'recipes', 'name': AppStrings.categoryName3},
+      {'title': 'diseases', 'name': AppStrings.categoryName4},
+      {'title': 'microelements', 'name': AppStrings.categoryName5},
+      {'title': 'products', 'name': AppStrings.categoryName6},
+      {'title': 'cooking', 'name': AppStrings.categoryName7},
     ];
     return Scaffold(
       appBar: AppBar(

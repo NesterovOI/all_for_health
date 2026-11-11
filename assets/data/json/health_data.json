@@ -1,44 +1,45 @@
 [
   {
     "id": "item_001",
-    "title": "Cardio Health",
-    "youTube": "https://youtube.com",
+    "categoryId": "herbs",
+    "title": "Ромашка лікарська",
     "image": "assets/images/menu/menu1.jpg",
     "translations": {
       "uk": {
-        "name": "Здоров'я серця",
-        "description": "Базові поради для підтримки кардіосистеми.",
-        "health": "assets/md/uk/cardio.md"
+        "name": "Ромашка лікарська",
+        "description": "Ромашка є однією з найпопулярніших лікарських рослин. Вона має протизапальні, заспокійливі та антисептичні властивості.",
+        "health": "assets/data/md/uk/chamomile.md",
+        "youTube": "https://www.youtube.com/watch?v=xgfzDqVxigs"
       },
       "en": {
-        "name": "Heart Health",
-        "description": "Basic tips for supporting the cardiovascular system.",
-        "health": "assets/md/en/cardio.md"
+        "name": "Chamomile",
+        "description": "Chamomile is one of the most popular medicinal plants. It is traditionally valued for its anti-inflammatory, calming, and antiseptic properties.",
+        "health": "assets/data/md/en/chamomile.md"
       },
       "pl": {
-        "name": "Zdrowie serca",
-        "description": "Podstawowe wskazówki wspierające układ krążenia.",
-        "health": "assets/md/pl/cardio.md"
+        "name": "Rumianek",
+        "description": "Rumianek jest jedną z najpopularniejszych roślin leczniczych. Jest ceniony za swoje właściwości przeciwzapalne, uspokajające i antyseptyczne.",
+        "health": "assets/data/md/pl/chamomile.md"
       },
       "de": {
-        "name": "Herzgesundheit",
-        "description": "Grundlegende Tipps zur Unterstützung des Herz-Kreislauf-Systems.",
-        "health": "assets/md/de/cardio.md"
+        "name": "Kamille",
+        "description": "Kamille gehört zu den beliebtesten Heilpflanzen. Sie wird traditionell wegen ihrer entzündungshemmenden, beruhigenden und antiseptischen Eigenschaften geschätzt.",
+        "health": "assets/data/md/de/chamomile.md"
       },
       "fr": {
-        "name": "Santé cardiaque",
-        "description": "Conseils de base pour soutenir le système cardiovasculaire.",
-        "health": "assets/md/fr/cardio.md"
+        "name": "Camomille",
+        "description": "La camomille est l'une des plantes médicinales les plus populaires. Elle est traditionnellement appréciée pour ses propriétés anti-inflammatoires, apaisantes et antiseptiques.",
+        "health": "assets/data/md/fr/chamomile.md"
       },
       "it": {
-        "name": "Salute del cuore",
-        "description": "Consigli di base per supportare il sistema cardiovascolare.",
-        "health": "assets/md/it/cardio.md"
+        "name": "Camomilla",
+        "description": "La camomilla è una delle piante medicinali più conosciute. È tradizionalmente apprezzata per le sue proprietà antinfiammatorie, calmanti e antisettiche.",
+        "health": "assets/data/md/it/chamomile.md"
       },
       "es": {
-        "name": "Salud del corazón",
-        "description": "Consejos básicos para apoyar el sistema cardiovascular.",
-        "health": "assets/md/es/cardio.md"
+        "name": "Manzanilla",
+        "description": "La manzanilla es una de las plantas medicinales más populares. Tradicionalmente se valora por sus propiedades antiinflamatorias, calmantes y antisépticas.",
+        "health": "assets/data/md/es/chamomile.md"
       }
     }
   }

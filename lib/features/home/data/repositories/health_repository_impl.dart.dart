@@ -2,6 +2,7 @@ import 'package:all_for_health/features/home/domain/entities/health_entity.dart'
 import 'package:all_for_health/features/home/data/models/health_model.dart';
 import 'package:all_for_health/features/home/domain/repositories/health_repository.dart';
 import 'package:all_for_health/features/home/data/datasources/health_local_data_source.dart';
+import 'package:flutter/foundation.dart';
 
 class HealthRepositoryImpl implements HealthRepository {
   final HealthLocalDataSource _localDataSource;
@@ -25,18 +26,29 @@ class HealthRepositoryImpl implements HealthRepository {
     try {
       return list.firstWhere((element) => element.id == id);
     } catch (_) {
-      null;
+      return null;
     }
   }
 
   @override
   Future<List<HealthEntity>> getHealthListByCategory(
-    String categoryTitle,
+    String categoryId,
     String langCode,
   ) async {
-    final listTitle = await getHealthList(langCode);
-    return listTitle
-        .where((element) => element.title == categoryTitle)
+    final list = await getHealthList(langCode);
+
+    debugPrint('CATEGORY ID: $categoryId');
+    debugPrint('TOTAL ITEMS: ${list.length}');
+
+    for (final item in list) {
+      debugPrint('ITEM: ${item.name} | CATEGORY: ${item.categoryId}');
+    }
+
+    final result = list
+        .where((element) => element.categoryId == categoryId)
         .toList();
+    debugPrint('FILTERED ITEMS: ${result.length}');
+
+    return result;
   }
 }
