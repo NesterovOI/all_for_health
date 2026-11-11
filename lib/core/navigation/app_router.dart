@@ -18,7 +18,7 @@ class AppRouter {
   static const String sport = 'sport';
   static const String homeDetails = '$homeMenu/homeDetails';
   static const String catalog = '/catalog';
-  static const String saveCatalog = '/saveCatalog';
+  static const String saveCatalog = '$catalog/saveCatalog';
   static const String settings = '/settings';
 }
 

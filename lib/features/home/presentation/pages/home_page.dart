@@ -47,10 +47,13 @@ class _HomePageState extends ConsumerState<HomePage> {
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: AppStrings.hintText,
-                prefix: Icon(Icons.search, size: AppDimensions.spaceXXXL),
-                suffix: IconButton(
+                prefixIcon: const Icon(
+                  Icons.search,
+                  size: AppDimensions.spaceXXXL,
+                ),
+                suffixIcon: IconButton(
                   onPressed: () => _searchController.clear(),
-                  icon: Icon(Icons.clear, size: AppDimensions.spaceXXXL),
+                  icon: const Icon(Icons.clear, size: AppDimensions.spaceXXXL),
                 ),
               ),
             ),
@@ -93,10 +96,15 @@ class _HomePageState extends ConsumerState<HomePage> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            Text(
-                              name,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                              overflow: TextOverflow.ellipsis,
+                            Padding(
+                              padding: const EdgeInsets.all(
+                                AppDimensions.spaceXXS,
+                              ),
+                              child: Text(
+                                name,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ],
                         ),

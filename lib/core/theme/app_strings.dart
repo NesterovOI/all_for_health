@@ -8,6 +8,8 @@ abstract class AppStrings {
   static const String emptyCategory = 'У цій категорії поки немає матеріалів.';
   static const String errorLoading = 'Помилка завантаження: ';
   static const String titleCatalog = 'Каталог';
+  static const String titleSaveCatalog = 'Збережений каталог';
+  static const String chooseCategory = 'Оберіть категорію';
   static const String categoryName1 = 'Усі';
   static const String categoryName2 = 'Лікарські рослини';
   static const String categoryName3 = 'Рецепти з рослин';
@@ -20,4 +22,6 @@ abstract class AppStrings {
       'Помилка завантаження списку здоровʼя: ';
   static const noName = 'Без назви';
   static const String noDescription = 'Без опису';
+  static const String nameCategory = 'Назва категорії: ';
+  static const String nameNote = 'Назва: ';
 }

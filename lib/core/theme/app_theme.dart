@@ -108,6 +108,7 @@ abstract class AppTheme {
       ),
       //Налаштування віджета Card
       cardTheme: CardThemeData(
+        margin: const EdgeInsets.all(AppDimensions.spaceXXXS),
         color: AppColors.lightSurfaceSecondary,
         elevation: AppDimensions.spaceXXS,
         shadowColor: AppColors.lightTextSecondary,
@@ -118,6 +119,11 @@ abstract class AppTheme {
             width: AppDimensions.spaceXXXS,
           ),
         ),
+      ),
+      //Налаштування FloatingActionButton
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.lightTextPrimary,
       ),
     );
   }
@@ -148,7 +154,7 @@ abstract class AppTheme {
         ),
         bodyMedium: TextStyle(
           fontSize: AppDimensions.fontBody,
-          color: AppColors.darkTextSecondary,
+          color: AppColors.darkTextPrimary,
           height: AppDimensions.spaceXXXS,
         ),
         bodySmall: TextStyle(
@@ -236,6 +242,11 @@ abstract class AppTheme {
             width: AppDimensions.spaceXXXS,
           ),
         ),
+      ),
+      //Налаштування FloatingActionButton
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: AppColors.darkSurface,
+        foregroundColor: AppColors.darkTextPrimary,
       ),
     );
   }

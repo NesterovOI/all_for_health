@@ -1,15 +1,6 @@
-import 'package:flutter/material.dart';
-
 class CategoryEntity {
   final String id;
-  final String name;
-  final int colorValue;
+  final String nameCategory;
 
-  CategoryEntity({
-    required this.id,
-    required this.name,
-    required this.colorValue,
-  });
-
-  Color get color => Color(colorValue);
+  CategoryEntity({required this.id, required this.nameCategory});
 }

@@ -14,6 +14,7 @@ abstract class AppColors {
   static const Color darkBackground = Color(0xFF0B2A44);
   static const Color darkSurface = Color(0xFF4D5365); //Для Card
   static const Color darkSurfaceSecondary = Color(0xFF167196); //Для Card
+  static const Color darkTextPrimaryCard = Color.fromARGB(255, 250, 251, 252);
   static const Color darkTextPrimary = Color(0xFFE4EDF5); //Колір тексту name
   static const Color darkTextSecondary = Color(
     0xFF6C8AA4,
