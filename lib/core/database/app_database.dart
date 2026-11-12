@@ -37,6 +37,41 @@ class AppDatabase extends _$AppDatabase {
   @override
   int get schemaVersion => 1;
 
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+    onCreate: (Migrator m) async {
+      await m.createAll();
+      await batch((batch) {
+        batch.insertAll(categoriesTable, [
+          CategoriesTableCompanion.insert(
+            id: '1',
+            nameCategory: AppStrings.categoryName2,
+          ),
+          CategoriesTableCompanion.insert(
+            id: '2',
+            nameCategory: AppStrings.categoryName3,
+          ),
+          CategoriesTableCompanion.insert(
+            id: '3',
+            nameCategory: AppStrings.categoryName4,
+          ),
+          CategoriesTableCompanion.insert(
+            id: '4',
+            nameCategory: AppStrings.categoryName5,
+          ),
+          CategoriesTableCompanion.insert(
+            id: '5',
+            nameCategory: AppStrings.categoryName6,
+          ),
+          CategoriesTableCompanion.insert(
+            id: '6',
+            nameCategory: AppStrings.categoryName7,
+          ),
+        ]);
+      });
+    },
+  );
+
   // --- МЕТОДИ ДЛЯ КАТЕГОРІЙ ---
 
   // Отримати всі категорії стрімом (реактивно)
@@ -64,7 +99,7 @@ class AppDatabase extends _$AppDatabase {
   // Отримати всі нотатки (з фільтрацією за категорією або без)
   Stream<List<NoteEntity>> watchNotes({String? categoryId}) {
     final query = select(notesTable);
-    if (categoryId != null && categoryId != AppStrings.categoryName1) {
+    if (categoryId != null && categoryId != 'all') {
       query.where((tbl) => tbl.categoryId.equals(categoryId));
     }
     return query

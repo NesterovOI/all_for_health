@@ -91,7 +91,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                 AppDimensions.radiusM,
                               ),
                               child: Image.asset(
-                                'assets/images/menu/menu$index.jpg',
+                                'assets/images/menu/menu$index.webp',
                                 width: double.infinity,
                                 fit: BoxFit.cover,
                               ),

@@ -7,6 +7,7 @@ abstract class AppStrings {
   static const String menu = 'Меню:';
   static const String emptyCategory = 'У цій категорії поки немає матеріалів.';
   static const String errorLoading = 'Помилка завантаження: ';
+  static const String errorLoadingCategory = 'Помилка завантаження категорій';
   static const String titleCatalog = 'Каталог';
   static const String titleSaveCatalog = 'Збережений каталог';
   static const String chooseCategory = 'Оберіть категорію';
@@ -22,6 +23,13 @@ abstract class AppStrings {
       'Помилка завантаження списку здоровʼя: ';
   static const noName = 'Без назви';
   static const String noDescription = 'Без опису';
-  static const String nameCategory = 'Назва категорії: ';
   static const String nameNote = 'Назва: ';
+  static const String newCategory = 'Нова категорія';
+  static const String nameCategory = 'Назва категорії';
+  static const String nameNoteSavePage = 'Назва нотатки';
+  static const String textNoteSavePage = 'Текст нотатки';
+  static const String cancel = 'Скасувати';
+  static const String saveNoteSavePage = 'Зберегти нотатку';
+  static const String add = 'Додати';
+  static const String addCategory = 'Додати категорію';
 }
