@@ -99,7 +99,7 @@ class AppDatabase extends _$AppDatabase {
   // Отримати всі нотатки (з фільтрацією за категорією або без)
   Stream<List<NoteEntity>> watchNotes({String? categoryId}) {
     final query = select(notesTable);
-    if (categoryId != null && categoryId != 'all') {
+    if (categoryId != null && categoryId != AppStrings.categoryName1) {
       query.where((tbl) => tbl.categoryId.equals(categoryId));
     }
     return query
