@@ -4,8 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:all_for_health/features/catalog/domain/entities/export_entity.dart';
 import 'package:go_router/go_router.dart';
 import 'package:all_for_health/core/navigation/app_router.dart';
-import 'package:all_for_health/features/catalog/domain/entities/export_entity.dart';
-import 'package:all_for_health/features/catalog/presentation/provider/database_provider.dart';
+import 'package:all_for_health/features/catalog/presentation/provider/catalog_provider.dart';
 
 class CatalogPage extends ConsumerStatefulWidget {
   const CatalogPage({super.key});
@@ -32,6 +31,7 @@ class _CatalogPageState extends ConsumerState<CatalogPage> {
     final categoriesAsync = ref.watch(categoriesStreamProvider);
     final notesAsync = ref.watch(notesStreamProvider);
     final selectedCategory = ref.watch(selectedCategoryFilterProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -127,7 +127,9 @@ class _CatalogPageState extends ConsumerState<CatalogPage> {
                           ),
                           trailing: IconButton(
                             onPressed: () {
-                              ref.read(databaseProvider).deleteNote(note.id);
+                              ref
+                                  .read(manageCatalogUseCaseProvider)
+                                  .deleteNote(note.id);
                             },
                             icon: Icon(Icons.delete, color: AppColors.error),
                           ),

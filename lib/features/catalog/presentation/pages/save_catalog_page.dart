@@ -1,5 +1,5 @@
 import 'package:all_for_health/features/catalog/domain/entities/export_entity.dart';
-import 'package:all_for_health/features/catalog/presentation/provider/database_provider.dart';
+import 'package:all_for_health/features/catalog/presentation/provider/catalog_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:all_for_health/core/theme/theme.dart';
@@ -47,8 +47,8 @@ class _SaveCatalogPageState extends ConsumerState<SaveCatalogPage> {
               if (newName.isNotEmpty) {
                 final newId = DateTime.now().microsecondsSinceEpoch.toString();
                 await ref
-                    .read(databaseProvider)
-                    .insertCategory(
+                    .read(manageCatalogUseCaseProvider)
+                    .addCatalog(
                       CategoryEntity(id: newId, nameCategory: newName),
                     );
                 setState(() {
@@ -145,7 +145,9 @@ class _SaveCatalogPageState extends ConsumerState<SaveCatalogPage> {
                       text: text,
                       categoryId: selectCategory,
                     );
-                    await ref.read(databaseProvider).insertNote(newNote);
+                    await ref
+                        .read(manageCatalogUseCaseProvider)
+                        .addNote(newNote);
                     if (context.mounted) context.pop();
                   }
                 }
