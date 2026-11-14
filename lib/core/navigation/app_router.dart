@@ -70,7 +70,10 @@ final GoRouter router = GoRouter(
               routes: [
                 GoRoute(
                   path: 'saveCatalog',
-                  builder: (context, state) => const SaveCatalogPage(),
+                  builder: (context, state) {
+                    final noteId = state.uri.queryParameters['noteId'];
+                    return SaveCatalogPage(noteId: noteId);
+                  },
                 ),
               ],
             ),

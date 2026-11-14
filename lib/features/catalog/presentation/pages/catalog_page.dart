@@ -115,6 +115,11 @@ class _CatalogPageState extends ConsumerState<CatalogPage> {
                           bottom: AppDimensions.spaceXS,
                         ),
                         child: ListTile(
+                          onTap: () {
+                            context.push(
+                              '${AppRouter.saveCatalog}?noteId=${note.id}',
+                            );
+                          },
                           title: Text(
                             note.name,
                             style: Theme.of(context).textTheme.bodyMedium,

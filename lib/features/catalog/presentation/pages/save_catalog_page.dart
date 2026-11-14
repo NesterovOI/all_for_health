@@ -8,7 +8,8 @@ import 'package:go_router/go_router.dart';
 final saveCatalogPageProvider = Provider((ref) => SaveCatalogPage());
 
 class SaveCatalogPage extends ConsumerStatefulWidget {
-  const SaveCatalogPage({super.key});
+  final String? noteId;
+  const SaveCatalogPage({super.key, this.noteId});
 
   @override
   ConsumerState<SaveCatalogPage> createState() => _SaveCatalogPageState();
@@ -18,6 +19,33 @@ class _SaveCatalogPageState extends ConsumerState<SaveCatalogPage> {
   final _nameController = TextEditingController();
   final _textController = TextEditingController();
   String? _selectedCategoryId;
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.noteId != null) {
+      _loadNoteData();
+    }
+  }
+
+  Future<void> _loadNoteData() async {
+    setState(() => _isLoading = true);
+    final id = widget.noteId;
+    if (id == null) return;
+    final note = await ref.read(getNoteByIdUseCase).call(id);
+
+    if (note != null && mounted) {
+      _nameController.text = note.name;
+      _textController.text = note.text;
+      setState(() {
+        _selectedCategoryId = note.categoryId;
+        _isLoading = false;
+      });
+    } else {
+      setState(() => _isLoading = false);
+    }
+  }
 
   @override
   void dispose() {
@@ -67,6 +95,18 @@ class _SaveCatalogPageState extends ConsumerState<SaveCatalogPage> {
   @override
   Widget build(BuildContext context) {
     final categoriesAsync = ref.watch(categoriesStreamProvider);
+
+    if (_isLoading) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            widget.noteId == null ? AppStrings.loading : AppStrings.editingNote,
+          ),
+        ),
+        body: const Center(child: CircularProgressIndicator()),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -137,22 +177,41 @@ class _SaveCatalogPageState extends ConsumerState<SaveCatalogPage> {
                 final name = _nameController.text.trim();
                 final text = _textController.text.trim();
                 final selectCategory = _selectedCategoryId;
+
                 if (selectCategory != null) {
                   if (name.isNotEmpty && text.isNotEmpty) {
-                    final newNote = NoteEntity(
-                      id: DateTime.now().microsecondsSinceEpoch.toString(),
-                      name: name,
-                      text: text,
-                      categoryId: selectCategory,
+                    final manageUseCase = ref.read(
+                      manageCatalogUseCaseProvider,
                     );
-                    await ref
-                        .read(manageCatalogUseCaseProvider)
-                        .addNote(newNote);
+
+                    if (widget.noteId == null) {
+                      final newNote = NoteEntity(
+                        id: DateTime.now().microsecondsSinceEpoch.toString(),
+                        name: name,
+                        text: text,
+                        categoryId: selectCategory,
+                      );
+                      await manageUseCase.addNote(newNote);
+                    } else {
+                      final id = widget.noteId;
+                      if (id == null) return;
+                      final updateNote = NoteEntity(
+                        id: id,
+                        name: name,
+                        text: text,
+                        categoryId: selectCategory,
+                      );
+                      await manageUseCase.updateNote(updateNote);
+                    }
                     if (context.mounted) context.pop();
                   }
                 }
               },
-              child: Text(AppStrings.saveNoteSavePage),
+              child: Text(
+                widget.noteId == null
+                    ? AppStrings.saveNoteSavePage
+                    : AppStrings.updateNote,
+              ),
             ),
           ],
         ),

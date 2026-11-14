@@ -47,4 +47,14 @@ class CatalogRepositoryImpl extends CatalogRepository {
   Future<void> deleteNote(String id) async {
     await _database.deleteNote(id);
   }
+
+  @override
+  Future<NoteEntity?> getNoteById(String id) async {
+    await _database.getNoteById(id);
+  }
+
+  @override
+  Future<bool> updateNote(NoteEntity note) async {
+    return await _database.updateNote(note);
+  }
 }

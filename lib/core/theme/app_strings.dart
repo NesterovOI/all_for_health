@@ -32,4 +32,7 @@ abstract class AppStrings {
   static const String saveNoteSavePage = 'Зберегти нотатку';
   static const String add = 'Додати';
   static const String addCategory = 'Додати категорію';
+  static const String loading = 'Завантаження...';
+  static const String editingNote = 'Редагувати нотатку';
+  static const String updateNote = 'Оновити нотатку';
 }

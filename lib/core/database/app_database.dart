@@ -99,9 +99,11 @@ class AppDatabase extends _$AppDatabase {
   // Отримати всі нотатки (з фільтрацією за категорією або без)
   Stream<List<NoteEntity>> watchNotes({String? categoryId}) {
     final query = select(notesTable);
-    if (categoryId != null && categoryId != AppStrings.categoryName1) {
+
+    if (categoryId != null && categoryId != 'all') {
       query.where((tbl) => tbl.categoryId.equals(categoryId));
     }
+
     return query
         .map(
           (row) => NoteEntity(
@@ -124,6 +126,31 @@ class AppDatabase extends _$AppDatabase {
         categoryId: note.categoryId,
       ),
       mode: InsertMode.insertOrReplace,
+    );
+  }
+
+  // Оновити існуючу нотатку
+  Future<bool> updateNote(NoteEntity note) async {
+    return await update(notesTable).replace(
+      NotesTableCompanion(
+        id: Value(note.id),
+        name: Value(note.name),
+        textContent: Value(note.categoryId),
+        categoryId: Value(note.categoryId),
+      ),
+    );
+  }
+
+  Future<NoteEntity?> getNoteById(String id) async {
+    final query = select(notesTable)..where((tbl) => tbl.id.equals(id));
+    final row = await query.getSingleOrNull();
+    if (row == null) return null;
+
+    return NoteEntity(
+      id: row.id,
+      name: row.name,
+      text: row.textContent,
+      categoryId: row.categoryId,
     );
   }
 

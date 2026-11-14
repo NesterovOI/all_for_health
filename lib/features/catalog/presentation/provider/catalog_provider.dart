@@ -1,3 +1,5 @@
+import 'package:all_for_health/features/catalog/domain/usecases/get_note_by_id_usecase.dart';
+import 'package:all_for_health/features/catalog/domain/usecases/update_note_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:all_for_health/core/database/app_database.dart';
 import 'package:all_for_health/features/catalog/data/repositories/catalog_repository_impl.dart';
@@ -32,6 +34,16 @@ final watchNotesUseCasesProvider = Provider<WatchNotesUseCase>((ref) {
 final manageCatalogUseCaseProvider = Provider<ManageCatalogUseCase>((ref) {
   final repo = ref.watch(catalogRepositoryProvider);
   return ManageCatalogUseCase(repo);
+});
+
+final getNoteByIdUseCase = Provider<GetNoteByIdUseCase>((ref) {
+  final repo = ref.watch(catalogRepositoryProvider);
+  return GetNoteByIdUseCase(repo);
+});
+
+final updateNoteUseCase = Provider<UpdateNoteUseCase>((ref) {
+  final repo = ref.watch(catalogRepositoryProvider);
+  return UpdateNoteUseCase(repo);
 });
 
 class SelectedCategoryFilterNotifier extends Notifier<String?> {
