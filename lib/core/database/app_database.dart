@@ -135,7 +135,7 @@ class AppDatabase extends _$AppDatabase {
       NotesTableCompanion(
         id: Value(note.id),
         name: Value(note.name),
-        textContent: Value(note.categoryId),
+        textContent: Value(note.text),
         categoryId: Value(note.categoryId),
       ),
     );

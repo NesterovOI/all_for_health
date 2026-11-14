@@ -19,7 +19,7 @@ class CatalogRepositoryImpl extends CatalogRepository {
 
   @override
   Stream<List<NoteEntity>> watchNote({String? categoryId}) {
-    return _database.watchNotes().map((rows) {
+    return _database.watchNotes(categoryId: categoryId).map((rows) {
       return rows
           .map(
             (row) => NoteEntity(
@@ -49,8 +49,8 @@ class CatalogRepositoryImpl extends CatalogRepository {
   }
 
   @override
-  Future<NoteEntity?> getNoteById(String id) async {
-    await _database.getNoteById(id);
+  Future<NoteEntity?> getNoteById(String id) {
+    return _database.getNoteById(id);
   }
 
   @override
