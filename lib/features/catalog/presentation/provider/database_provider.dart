@@ -1,5 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:all_for_health/core/database/app_database.dart';
+import 'package:all_for_health/features/catalog/data/repositories/catalog_repository_impl.dart';
+import 'package:all_for_health/features/catalog/domain/repositories/catalog_repository.dart';
+import 'package:all_for_health/features/catalog/domain/usecases/manage_catalog_usecase.dart';
+import 'package:all_for_health/features/catalog/domain/usecases/watch_categories_usecase.dart';
+import 'package:all_for_health/features/catalog/domain/usecases/watch_notes_usecase.dart';
 import 'package:all_for_health/features/catalog/domain/entities/export_entity.dart';
 
 // 1. Провайдер екземпляра бази даних
@@ -7,6 +12,26 @@ final databaseProvider = Provider<AppDatabase>((ref) {
   final db = AppDatabase();
   ref.onDispose(db.close);
   return db;
+});
+
+final catalogRepositoryProvider = Provider<CatalogRepository>((ref) {
+  final db = ref.watch(databaseProvider);
+  return CatalogRepositoryImpl(db);
+});
+
+final watchCategoriesUseCaseProvider = Provider<WatchCategoriesUseCase>((ref) {
+  final repo = ref.watch(catalogRepositoryProvider);
+  return WatchCategoriesUseCase(repo);
+});
+
+final watchNotesUseCasesProvider = Provider<WatchNotesUseCase>((ref) {
+  final repo = ref.watch(catalogRepositoryProvider);
+  return WatchNotesUseCase(repo);
+});
+
+final manageCatalogUseCaseProvider = Provider<ManageCatalogUseCase>((ref) {
+  final repo = ref.watch(catalogRepositoryProvider);
+  return ManageCatalogUseCase(repo);
 });
 
 class SelectedCategoryFilterNotifier extends Notifier<String?> {
@@ -24,15 +49,15 @@ final selectedCategoryFilterProvider =
       SelectedCategoryFilterNotifier.new,
     );
 
-// 3. Реактивний стрім категорій із бази
+// 3. Реактивний стрім категорій
 final categoriesStreamProvider = StreamProvider<List<CategoryEntity>>((ref) {
-  final db = ref.watch(databaseProvider);
-  return db.watchCategories();
+  final useCase = ref.watch(watchCategoriesUseCaseProvider);
+  return useCase();
 });
 
 // 4. Реактивний стрім нотаток (залежить від обраного фільтра категорії)
 final notesStreamProvider = StreamProvider<List<NoteEntity>>((ref) {
-  final db = ref.watch(databaseProvider);
+  final useCase = ref.watch(watchNotesUseCasesProvider);
   final selectedCategory = ref.watch(selectedCategoryFilterProvider);
-  return db.watchNotes(categoryId: selectedCategory);
+  return useCase(categoryId: selectedCategory);
 });
