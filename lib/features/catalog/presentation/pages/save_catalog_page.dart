@@ -183,6 +183,7 @@ class _SaveCatalogPageState extends ConsumerState<SaveCatalogPage> {
                     final manageUseCase = ref.read(
                       manageCatalogUseCaseProvider,
                     );
+                    final update = ref.read(updateNoteUseCase);
 
                     if (widget.noteId == null) {
                       final newNote = NoteEntity(
@@ -201,7 +202,7 @@ class _SaveCatalogPageState extends ConsumerState<SaveCatalogPage> {
                         text: text,
                         categoryId: selectCategory,
                       );
-                      await manageUseCase.updateNote(updateNote);
+                      await update.call(updateNote);
                     }
                     if (context.mounted) context.pop();
                   }

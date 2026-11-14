@@ -9,6 +9,4 @@ class ManageCatalogUseCase {
       _repository.insertCategory(category);
   Future<void> addNote(NoteEntity note) => _repository.insertNote(note);
   Future<void> deleteNote(String id) => _repository.deleteNote(id);
-  Future<bool> updateNote(NoteEntity note) => _repository.updateNote(note);
-  Future<NoteEntity?> getNoteById(String id) => _repository.getNoteById(id);
 }
