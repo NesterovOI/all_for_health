@@ -18,19 +18,24 @@ class CatalogRepositoryImpl extends CatalogRepository {
   }
 
   @override
-  Stream<List<NoteEntity>> watchNote({String? categoryId}) {
-    return _database.watchNotes(categoryId: categoryId).map((rows) {
-      return rows
-          .map(
-            (row) => NoteEntity(
-              id: row.id,
-              name: row.name,
-              text: row.text,
-              categoryId: row.categoryId,
-            ),
-          )
-          .toList();
-    });
+  Stream<List<NoteEntity>> watchNote({
+    String? categoryId,
+    String? searchQuery,
+  }) {
+    return _database
+        .watchNotes(categoryId: categoryId, searchQuery: searchQuery)
+        .map((rows) {
+          return rows
+              .map(
+                (row) => NoteEntity(
+                  id: row.id,
+                  name: row.name,
+                  text: row.text,
+                  categoryId: row.categoryId,
+                ),
+              )
+              .toList();
+        });
   }
 
   @override

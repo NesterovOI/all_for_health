@@ -87,6 +87,9 @@ class _CatalogPageState extends ConsumerState<CatalogPage> {
             const SizedBox(height: AppDimensions.spaceXXXM),
             TextFormField(
               controller: _searchController,
+              onChanged: (value) {
+                ref.read(searchQueryProvider.notifier).setQuery(value);
+              },
               decoration: InputDecoration(
                 hintText: AppStrings.hintText,
                 prefixIcon: const Icon(
@@ -94,7 +97,10 @@ class _CatalogPageState extends ConsumerState<CatalogPage> {
                   size: AppDimensions.spaceXXXL,
                 ),
                 suffixIcon: IconButton(
-                  onPressed: () => _searchController.clear(),
+                  onPressed: () {
+                    _searchController.clear();
+                    ref.read(searchQueryProvider.notifier).clear();
+                  },
                   icon: const Icon(Icons.clear, size: AppDimensions.spaceXXXL),
                 ),
               ),
@@ -104,7 +110,14 @@ class _CatalogPageState extends ConsumerState<CatalogPage> {
               child: notesAsync.when(
                 data: (notes) {
                   if (notes.isEmpty) {
-                    return Center(child: Text(AppStrings.emptyCategory));
+                    final searchQuery = ref.read(searchQueryProvider);
+                    return Center(
+                      child: Text(
+                        searchQuery.isEmpty
+                            ? AppStrings.notFind
+                            : AppStrings.emptyCategory,
+                      ),
+                    );
                   }
                   return ListView.builder(
                     itemCount: notes.length,

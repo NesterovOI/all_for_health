@@ -5,6 +5,6 @@ class WatchNotesUseCase {
   final CatalogRepository _repository;
   WatchNotesUseCase(this._repository);
 
-  Stream<List<NoteEntity>> call({String? categoryId}) =>
-      _repository.watchNote(categoryId: categoryId);
+  Stream<List<NoteEntity>> call({String? categoryId, String? searchQuery}) =>
+      _repository.watchNote(categoryId: categoryId, searchQuery: searchQuery);
 }

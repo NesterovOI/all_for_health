@@ -6,6 +6,7 @@ abstract class AppStrings {
   static const String hintText = 'Пошук';
   static const String menu = 'Меню:';
   static const String emptyCategory = 'У цій категорії поки немає матеріалів.';
+  static const String notFind = 'Нічого не знайдено';
   static const String errorLoading = 'Помилка завантаження: ';
   static const String errorLoadingCategory = 'Помилка завантаження категорій';
   static const String titleCatalog = 'Каталог';

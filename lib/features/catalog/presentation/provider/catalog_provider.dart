@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:all_for_health/features/catalog/domain/usecases/get_note_by_id_usecase.dart';
 import 'package:all_for_health/features/catalog/domain/usecases/update_note_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -70,6 +71,37 @@ final categoriesStreamProvider = StreamProvider<List<CategoryEntity>>((ref) {
 // 4. Реактивний стрім нотаток (залежить від обраного фільтра категорії)
 final notesStreamProvider = StreamProvider<List<NoteEntity>>((ref) {
   final useCase = ref.watch(watchNotesUseCasesProvider);
+
   final selectedCategory = ref.watch(selectedCategoryFilterProvider);
-  return useCase(categoryId: selectedCategory);
+
+  final searchQuery = ref.watch(searchQueryProvider);
+  return useCase(categoryId: selectedCategory, searchQuery: searchQuery);
 });
+
+class SearchQueryNotifier extends Notifier<String> {
+  Timer? _debounce;
+  @override
+  String build() {
+    ref.onDispose(() {
+      _debounce?.cancel();
+    });
+    return '';
+  }
+
+  void setQuery(String query) {
+    _debounce?.cancel();
+
+    _debounce = Timer(const Duration(milliseconds: 300), () {
+      state = query.trim();
+    });
+  }
+
+  void clear() {
+    _debounce?.cancel();
+    state = '';
+  }
+}
+
+final searchQueryProvider = NotifierProvider<SearchQueryNotifier, String>(
+  SearchQueryNotifier.new,
+);

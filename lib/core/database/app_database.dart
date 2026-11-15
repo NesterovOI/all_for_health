@@ -97,23 +97,37 @@ class AppDatabase extends _$AppDatabase {
   // --- МЕТОДИ ДЛЯ НОТАТОК ---
 
   // Отримати всі нотатки (з фільтрацією за категорією або без)
-  Stream<List<NoteEntity>> watchNotes({String? categoryId}) {
+  Stream<List<NoteEntity>> watchNotes({
+    String? categoryId,
+    String? searchQuery,
+  }) {
     final query = select(notesTable);
 
     if (categoryId != null && categoryId != 'all') {
       query.where((tbl) => tbl.categoryId.equals(categoryId));
     }
 
-    return query
-        .map(
-          (row) => NoteEntity(
-            id: row.id,
-            name: row.name,
-            text: row.textContent,
-            categoryId: row.categoryId,
-          ),
-        )
-        .watch();
+    return query.watch().map((rows) {
+      final normalizedQuery = searchQuery?.trim().toLowerCase() ?? '';
+
+      final filteredRows = normalizedQuery.isEmpty
+          ? rows
+          : rows.where((row) {
+              return row.name.toLowerCase().contains(normalizedQuery) ||
+                  row.textContent.toLowerCase().contains(normalizedQuery);
+            }).toList();
+
+      return filteredRows
+          .map(
+            (row) => NoteEntity(
+              id: row.id,
+              name: row.name,
+              text: row.textContent,
+              categoryId: row.categoryId,
+            ),
+          )
+          .toList();
+    });
   }
 
   // Додати нотатку
