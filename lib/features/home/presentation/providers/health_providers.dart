@@ -4,13 +4,6 @@ import 'package:all_for_health/features/home/data/repositories/health_repository
 import 'package:all_for_health/features/home/domain/entities/health_entity.dart';
 import 'package:all_for_health/features/home/domain/usecases/export_usecase.dart';
 
-/*
- * Тепер створимо провайдери. Оскільки вкладки налаштувань мови ще немає, 
- * ми створимо тимчасовий languageProvider, який за замовчуванням повертає
- * 'uk'. Коли ви створите екран налаштувань, ви просто заміните його на
- *  Notifier (із збереженням через Drift). 
- */
-
 final languageProvider = Provider<String>((ref) => 'uk');
 
 final healthLocalDataSourceProvider = Provider<HealthLocalDataSource>((ref) {
@@ -53,4 +46,19 @@ final healthListProvider = FutureProvider<List<HealthEntity>>((ref) async {
   ); // Якщо мова зміниться, провайдер перезапуститься сам!
   final useCase = ref.watch(getHealthListUseCaseProvider);
   return await useCase.call(langCode);
+});
+
+final searchHealthProvider = FutureProvider.family<List<HealthEntity>, String>((
+  ref,
+  rawQuery,
+) async {
+  final query = rawQuery.trim().toLowerCase();
+  if (query.isEmpty) return const [];
+  final allItems = await ref.watch(healthListProvider.future);
+  return allItems.where((item) {
+    final nameMatch = item.name.toLowerCase().contains(query);
+    final descriptionMatch = item.description.toLowerCase().contains(query);
+    final categoryIdMatch = item.categoryId.toLowerCase().contains(query);
+    return nameMatch || descriptionMatch || categoryIdMatch;
+  }).toList();
 });

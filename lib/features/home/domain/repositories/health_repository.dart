@@ -4,7 +4,7 @@ abstract class HealthRepository {
   Future<List<HealthEntity>> getHealthList(String langCode);
   Future<HealthEntity?> getHealthDetail(String id, String langCode);
   Future<List<HealthEntity>> getHealthListByCategory(
-    String categoryTitle,
+    String categoryId,
     String langCode,
   );
 }

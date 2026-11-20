@@ -45,27 +45,27 @@ class AppDatabase extends _$AppDatabase {
         batch.insertAll(categoriesTable, [
           CategoriesTableCompanion.insert(
             id: '1',
-            nameCategory: AppStrings.categoryName2,
+            nameCategory: AppStrings.categoryHerbs,
           ),
           CategoriesTableCompanion.insert(
             id: '2',
-            nameCategory: AppStrings.categoryName3,
+            nameCategory: AppStrings.categoryRecipes,
           ),
           CategoriesTableCompanion.insert(
             id: '3',
-            nameCategory: AppStrings.categoryName4,
+            nameCategory: AppStrings.categoryDiseases,
           ),
           CategoriesTableCompanion.insert(
             id: '4',
-            nameCategory: AppStrings.categoryName5,
+            nameCategory: AppStrings.categoryMicroelements,
           ),
           CategoriesTableCompanion.insert(
             id: '5',
-            nameCategory: AppStrings.categoryName6,
+            nameCategory: AppStrings.categoryProducts,
           ),
           CategoriesTableCompanion.insert(
             id: '6',
-            nameCategory: AppStrings.categoryName7,
+            nameCategory: AppStrings.categoryCooking,
           ),
         ]);
       });

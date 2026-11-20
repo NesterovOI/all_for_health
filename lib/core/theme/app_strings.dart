@@ -13,12 +13,12 @@ abstract class AppStrings {
   static const String titleSaveCatalog = 'Збережений каталог';
   static const String chooseCategory = 'Оберіть категорію';
   static const String categoryName1 = 'Усі';
-  static const String categoryName2 = 'Лікарські рослини';
-  static const String categoryName3 = 'Рецепти з рослин';
-  static const String categoryName4 = 'Хвороби';
-  static const String categoryName5 = 'Мікроелементи';
-  static const String categoryName6 = 'Продукти';
-  static const String categoryName7 = 'Кулінарія';
+  static const String categoryHerbs = 'Лікарські рослини';
+  static const String categoryRecipes = 'Рецепти з рослин';
+  static const String categoryDiseases = 'Хвороби';
+  static const String categoryMicroelements = 'Мікроелементи';
+  static const String categoryProducts = 'Продукти';
+  static const String categoryCooking = 'Кулінарія';
 
   static const String errorLoadingHealthList =
       'Помилка завантаження списку здоровʼя: ';
@@ -36,4 +36,5 @@ abstract class AppStrings {
   static const String loading = 'Завантаження...';
   static const String editingNote = 'Редагувати нотатку';
   static const String updateNote = 'Оновити нотатку';
+  static const String unknownCategoryId = 'Невідома категорія для JSON: ';
 }
